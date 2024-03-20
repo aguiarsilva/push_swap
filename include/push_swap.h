@@ -14,6 +14,7 @@
 # define PUSH_SWAP_H
 
 # include <stdbool.h>
+# include <stdlib.h>
 # include <limits.h>
 # include "../libft/libft.h"
 # include "../libft/ft_printf.h"
@@ -33,7 +34,8 @@ typedef struct s_stack
 } t_stack;
 
 //Error Handling
-
+void    stack_free(t_stack  **node);
+void    err_free(t_stack **a);
 // Start Stack
 
 // Start nodes
