@@ -12,6 +12,8 @@
 
 #include "../include/push_swap.h"
 
+
+
 void    stack_free(t_stack  **node)
 {
     t_stack *temp;

@@ -36,6 +36,7 @@ typedef struct s_stack
 //Error Handling
 void    stack_free(t_stack  **node);
 void    err_free(t_stack **a);
+
 // Start Stack
 
 // Start nodes
@@ -47,6 +48,10 @@ t_stack *search_last(t_stack  *pile);
 bool    is_sorted(t_stack *pile);
 t_stack *find_smallest(t_stack   *pile);
 t_stack *find_biggest(t_stack  *pile);
+void    set_cheapest(t_stack *node);
+t_stack *get_cheapest(t_stack *node);
+void    index(t_stack *node);
+void    set_to_push(t_stack **node, t_stack *top_node, char stack_id);
 
 // Commands
 
