@@ -89,18 +89,33 @@ t_stack *find_biggest(t_stack  *pile)
     return (biggest_node);
 }
 
-void    set_cheapest(t_stack *node)
+void    set_cheapest(t_stack *pile)
 {
     // need variable to store the value of the cheapest node found on the iteration
+    long    cheapest;
     // need variable to store pointer to the cheapest node so far
+    t_stack     *cheapest_node;
     // need to check if the stack is empty and return in case of empty stack
+    if  (!pile)
+        return;
     // assign the biggest long number as the cheapest to begin
+    cheapest = LONG_MAX;
     // iterate through the stack until its end
-        // Check if the current push cost is cheaper than the cheapest value 
+    while (pile)
+    {
+        // Check if the current push cost is cheaper than the cheapest value
+        if (pile->cost < cheapest)
+        {
             //if so, update the current node
-            //assign the current value to the cheapest value so far
+            cheapest = pile->cost;
+            //assign the current value to the cheapest value so far  
+            cheapest_node = pile;
+        } 
         // move to next node to compare it
+        pile = pile->next;
+    }           
     // if no cheapest node than the current is found, set the cheapest node attribute to true
+    cheapest_node->cheap = true;
 }
 
 t_stack *get_cheapest(t_stack *node)
@@ -122,34 +137,66 @@ t_stack *get_cheapest(t_stack *node)
     return (NULL);
 }
 
-void    index(t_stack *node)
+void    index(t_stack *pile)
 {
     // need variable to store the index of current node
+    int idx;
     // need variable to store the position of the median of stack
+    int median;
     // set the first index to '0' as it is the first index number
+    idx = 0;
     // check if the stack is empty, if so, return
+    if (!pile)
+        return;
     // the median needs to be calculated by dividing the lenght of the stack by 2
+    median = list_len(pile) / 2;
     // iterate through the stack until its end
+    while (pile)
+    {
         //assign the current index value to the current node
+        pile->i = idx;
         //if index is less or equal median
+        if (idx <= median)
             // set the above_median attribute of the structure to true
-            // else set it to false
+            pile->over_med = true;     
+        else
+        // else set it to false
+            pile->over_med = false;
         // move to the next node to continue the iteration
+        pile = pile->next;
         // increment the index value to set the next node with its index number
-
+        idx++;
+    }
 }
 
-void    set_to_push(t_stack **node, t_stack *top_node, char stack_id)
+void    set_to_push(t_stack **pile, t_stack *top_node, char stack_id)
 {
  // iterate through the stack checking if the required node is not already the first node
+ while (*pile != top_node)
+ {
     // if not, and it is stack a, do
-        //check if top node is above the median, 
+    if (stack_id == 'a')
+    {
+        //check if top node is above the median,
+        if (top_node->over_med) 
             // if so, rotate a
+            ra(pile, false);
         // if not
+        else
             // reverse rotate a
+            rra(pile, false);
+    }        
     // else if the stack is b
+    else if (stack_id == 'b')
+    {
         // check if top node is above the median
+        if (top_node->over_med)
             // if so, rotate b
+            rb(pile, false);
         // if not
-            // reverse rotate b    
+        else
+            // reverse rotate b
+            rrb(pile, false);
+    }            
+ }
 }
