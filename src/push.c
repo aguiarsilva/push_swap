@@ -30,7 +30,7 @@ static void     push(t_stack **dest, t_stack **src)
     //Detach the node to push it from its stack
     to_push->prev = NULL;
     //Check if the destination stack is empty
-    if(!*dst)
+    if(!*dest)
     //if it is empty, assing the first node to the stack, the node we want pushed
     {
         *dest = to_push;

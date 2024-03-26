@@ -137,7 +137,7 @@ t_stack *get_cheapest(t_stack *node)
     return (NULL);
 }
 
-void    index(t_stack *pile)
+void    cur_index(t_stack *pile)
 {
     // need variable to store the index of current node
     int idx;
@@ -165,7 +165,7 @@ void    index(t_stack *pile)
         // move to the next node to continue the iteration
         pile = pile->next;
         // increment the index value to set the next node with its index number
-        idx++;
+        ++idx;
     }
 }
 

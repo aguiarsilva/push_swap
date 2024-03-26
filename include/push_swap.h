@@ -16,8 +16,8 @@
 # include <stdbool.h>
 # include <stdlib.h>
 # include <limits.h>
-# include "../libft/libft.h"
-# include "../libft/ft_printf.h"
+# include "../libft/inc/libft.h"
+# include "../libft/inc/ft_printf.h"
 
 //create the struct of a doubly linked list
 
@@ -34,12 +34,21 @@ typedef struct s_stack
 } t_stack;
 
 //Error Handling
+
 void    stack_free(t_stack  **node);
 void    err_free(t_stack **a);
+int     syntax_error(char *str);
+int     dup_error(t_stack *a, int n);
 
 // Start Stack
 
+void    start_stack_a(t_stack **a, char **argv);
+void     add_node(t_stack **pile, int n);
+
 // Start nodes
+
+void    init_a(t_stack *a, t_stack *b);
+void    init_b(t_stack *a, t_stack *b);
 
 // utils
 
@@ -50,28 +59,27 @@ t_stack *find_smallest(t_stack   *pile);
 t_stack *find_biggest(t_stack  *pile);
 void    set_cheapest(t_stack *node);
 t_stack *get_cheapest(t_stack *node);
-void    index(t_stack *node);
+void    cur_index(t_stack *node);
 void    set_to_push(t_stack **node, t_stack *top_node, char stack_id);
 
 // Commands
 
-static void    swap(t_stack **head);
 void    sa(t_stack **a, bool flag);
 void    sb(t_stack **b, bool flag);
 void    ss(t_stack **a, t_stack **b, bool flag);
-static void rev_rotate(t_stack **node);
 void    rra(t_stack **a, bool flag);
 void    rrb(t_stack **b, bool flag);
 void    rrr(t_stack **a, t_stack **b, bool flag);
-static void     rotate(t_stack  **node);
 void    ra(t_stack **a, bool flag);
 void    rb(t_stack **b, bool flag);
 void    rr(t_stack **a, t_stack **b, bool flag);
-static void     push(t_stack **dest, t_stack **src);
 void    pa(t_stack **a, t_stack **b, bool flag);
 void    pb(t_stack **a, t_stack **b, bool flag);
 
 // Algorithms used
+
 void    small_sort(t_stack **a);
+void    sort_big(t_stack **a, t_stack **b);
+void     small_on_top(t_stack **a);
 
 #endif
