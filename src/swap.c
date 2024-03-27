@@ -34,14 +34,14 @@ static void    swap(t_stack **head)
 void    sa(t_stack **a, bool flag)
 {
     swap(a);
-    if (flag == NULL)
+    if (!flag)
         ft_printf("sa\n");
 }
 
 void    sb(t_stack **b, bool flag)
 {
     swap(b);
-    if (flag == NULL)
+    if (!flag)
         ft_printf("sb\n");
 }
 
@@ -49,6 +49,6 @@ void    ss(t_stack **a, t_stack **b, bool flag)
 {
     swap(a);
     swap(b);
-    if (flag == NULL)
+    if (!flag)
         ft_printf("ss\n");
 }

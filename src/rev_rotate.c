@@ -34,14 +34,14 @@ static void rev_rotate(t_stack **node)
 void    rra(t_stack **a, bool flag)
 {
     rev_rotate(a);
-    if (flag == NULL)
+    if (!flag)
         ft_printf("rra\n");
 }
 
 void    rrb(t_stack **b, bool flag)
 {
     rev_rotate(b);
-    if(flag == NULL)
+    if(!flag)
         ft_printf("rrb\n");
 }
 
@@ -49,6 +49,6 @@ void    rrr(t_stack **a, t_stack **b, bool flag)
 {
     rev_rotate(a);
     rev_rotate(b);
-    if (flag == NULL)
+    if (!flag)
         ft_printf("rrr\n");
 }

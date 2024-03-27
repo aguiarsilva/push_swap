@@ -12,13 +12,12 @@
 
 NAME	=	push_swap
 
-LIBFT	= libft.a
+LIBFT	= ./libft/libft.a
 LIBFT_PATH  = ./libft
 INC		= include/
 SRC_DIR = src/
 OBJ_DIR = obj/
-LIBNAME = libpush_swap.a
-CC = cc
+CC = gcc
 
 RM = rm -f
 
@@ -37,22 +36,33 @@ SRC	=	$(SRC_DIR)push_swap.c	\
 		$(SRC_DIR)swap.c	\
 		$(SRC_DIR)utils.c	\
 
-OBJS	= $(SRC:.c=.o)
+SRCS = $(SRC)
+
+OBJS	= $(patsubst $(SRC_DIR)%.c, $(OBJ_DIR)%.o,$(SRCS))
+
+start:
+		@make all
+
+$(LIBFT):
+	@make -C ./libft
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	@make -C $(LIBFT_PATH)
-	$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT_PATH) -lft -o $(NAME)
+$(NAME): $(OBJS) $(LIBFT)
+	$(CC) $(CFLAGS) $(INC) $(OBJS) $(LIBFT) -o $(NAME)
+
+$(OBJ_DIR)%.o:	$(SRC_DIR)%.c 
+	@mkdir -p $(@D)
+	@$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
 clean:
-	$(RM) $(OBJ)
-	@make -C $(LIBFT_PATH) clean
+	@$(RM) -r $(OBJ_DIR)
+	@make clean -C ./libft
 
 fclean: clean
-	$(RM) $(NAME) $(LIBNAME)
-	@make -C $(LIBFT_PATH) fclean
+	@$(RM) $(NAME)
+	@$(RM) $(LIBFT)
 
 re: fclean all
 
-.PHONY: all clean  fclean re
+.PHONY: all clean start fclean re
