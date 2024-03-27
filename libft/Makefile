@@ -6,19 +6,24 @@
 #    By: baguiar- <baguiar-@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/15 11:53:45 by baguiar-          #+#    #+#              #
-#    Updated: 2024/03/21 21:55:24 by baguiar-         ###   ########.fr        #
+#    Updated: 2024/03/27 22:48:11 by baguiar-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := libft.a
 
-INC	= inc/
-SRC_DIR		= src/
-OBJ_DIR		= obj/
+INC			:= inc/
+SRC_DIR		:= src/
+OBJ_DIR		:= obj/
 
 CC := cc
 
 CCFLAGS := -Wextra -Wall -Werror -I.
+
+RM = rm -f
+
+ARNAME = ar rcs $(NAME)
+RANNAME = ranlib $(NAME)
 
 FTIS_DIR = $(SRC_DIR)ft_is/ft_isalpha.c \
 		   $(SRC_DIR)ft_is/ft_isdigit.c \
@@ -47,7 +52,7 @@ FTTO_DIR =	$(SRC_DIR)ft_to/ft_toupper.c \
 
 FTSTR_DIR =	$(SRC_DIR)ft_str/ft_strlen.c \
 		  	$(SRC_DIR)ft_str/ft_strlcpy.c \
-			$(SRC_DIR)ft_str/ft_strlcat.c \ 
+			$(SRC_DIR)ft_str/ft_strlcat.c \
 		 	$(SRC_DIR)ft_str/ft_strchr.c \
 		  	$(SRC_DIR)ft_str/ft_strrchr.c \
 		  	$(SRC_DIR)ft_str/ft_strncmp.c \
@@ -60,7 +65,7 @@ FTSTR_DIR =	$(SRC_DIR)ft_str/ft_strlen.c \
 			$(SRC_DIR)ft_str/ft_strmapi.c \
 		  	$(SRC_DIR)ft_str/ft_striteri.c \
 
-FTLST_DIR = $(SRC_DIR)ft_lst/ft_lstnew.c \		  
+FTLST_DIR = $(SRC_DIR)ft_lst/ft_lstnew.c \
 		  	$(SRC_DIR)ft_lst/ft_lstadd_front.c \
 		  	$(SRC_DIR)ft_lst/ft_lstsize.c \
 		  	$(SRC_DIR)ft_lst/ft_lstlast.c \
@@ -76,16 +81,14 @@ FTPRINTF_DIR = 	$(SRC_DIR)ft_printf/ft_printf_cases.c \
 				$(SRC_DIR)ft_printf/ft_printf.c \
 
 GNL_DIR = $(SRC_DIR)gnl/get_next_line_utils.c \
-		  $(SRC_DIR)gnl/get_next_line.c \	  
+		  $(SRC_DIR)gnl/get_next_line.c \
 
-SRC	= $(FTIS_DIR) $(FTMEM_DIR) $(FTPUT_DIR) $(FTTO_DIR) $(FTSTR_DIR) $(FTLST_DIR) $(FTPRINTF_DIR) $(GNL_DIR)
+SRC	:= $(FTIS_DIR) $(FTMEM_DIR) $(FTPUT_DIR) $(FTTO_DIR) $(FTSTR_DIR) $(FTLST_DIR) $(FTPRINTF_DIR) $(GNL_DIR)
 
 OBJ := $(patsubst $(SRC_DIR)%.c,$(OBJ_DIR)%.o,$(SRC))
 
-RM = rm -f
-
-ARNAME = ar rcs $(NAME)
-RANNAME = ranlib $(NAME)
+RM := /bin/rm -f
+AR := ar rcs
 
 all: $(NAME)
 

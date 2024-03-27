@@ -38,22 +38,26 @@ SRC	=	$(SRC_DIR)push_swap.c	\
 
 SRCS = $(SRC)
 
-OBJS	= $(patsubst $(SRC_DIR)%.c, $(OBJ_DIR)%.o,$(SRCS))
+OBJS	:= $(patsubst $(SRC_DIR)%.c, $(OBJ_DIR)%.o,$(SRCS))
 
-start:
-		@make all
-
-$(LIBFT):
-	@make -C ./libft
+# $(LIBFT)
+#	@make -C ./libft
 
 all: $(NAME)
-
-$(NAME): $(OBJS) $(LIBFT)
-	$(CC) $(CFLAGS) $(INC) $(OBJS) $(LIBFT) -o $(NAME)
 
 $(OBJ_DIR)%.o:	$(SRC_DIR)%.c 
 	@mkdir -p $(@D)
 	@$(CC) $(CFLAGS) $(INC) -c $< -o $@
+
+$(NAME): $(OBJS)
+	@make -s -C ./libft
+	$(CC) $(CFLAGS) $(INC) $(OBJS) $(LIBFT) -o $(NAME)
+
+start:
+	@make all
+
+libft:
+	@make -C ./libft
 
 clean:
 	@$(RM) -r $(OBJ_DIR)
