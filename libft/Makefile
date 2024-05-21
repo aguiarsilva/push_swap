@@ -6,7 +6,7 @@
 #    By: baguiar- <baguiar-@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/15 11:53:45 by baguiar-          #+#    #+#              #
-#    Updated: 2024/03/27 22:48:11 by baguiar-         ###   ########.fr        #
+#    Updated: 2024/05/17 22:57:06 by baguiar-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,7 @@ FTTO_DIR =	$(SRC_DIR)ft_to/ft_toupper.c \
 		  	$(SRC_DIR)ft_to/ft_tolower.c \
 			$(SRC_DIR)ft_to/ft_atoi.c \
 			$(SRC_DIR)ft_to/ft_itoa.c \
-			$(SRC_DIR)ft_to/ft_atoll.c \
+			$(SRC_DIR)ft_to/ft_atol.c \
 
 FTSTR_DIR =	$(SRC_DIR)ft_str/ft_strlen.c \
 		  	$(SRC_DIR)ft_str/ft_strlcpy.c \

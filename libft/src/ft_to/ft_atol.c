@@ -12,9 +12,9 @@
 
 #include "../../inc/libft.h"
 
-long long   ft_atoll(char *str)
+long   ft_atol(char *str)
 {
-    long long   res;
+    long        res;
     int         sign;
 
     while((*str == 32) || (*str >= 9 && *str <= 13))

@@ -14,12 +14,13 @@
 # define PUSH_SWAP_H
 
 # include <stdbool.h>
+# include <unistd.h>
 # include <stdlib.h>
 # include <limits.h>
 # include "../libft/inc/libft.h"
 # include "../libft/inc/ft_printf.h"
 
-//create the struct of a doubly linked list
+//create the struct of a linked list
 
 typedef struct s_stack
 {
@@ -33,12 +34,21 @@ typedef struct s_stack
     struct  s_stack *prev;
 } t_stack;
 
+/*
+typedef struct s_pile
+{
+    t_stack  *top;
+} t_pile;
+*/
+
 //Error Handling
 
-void    stack_free(t_stack  **node);
+void    exit_error(t_pile **a, char **argv, bool flag_argc);
+void    stack_free(t_pile  **node);
 void    err_free(t_stack **a);
 int     syntax_error(char *str);
 int     dup_error(t_stack *a, int n);
+//void    free_split(char **argv);
 
 // Start Stack
 
@@ -52,6 +62,7 @@ void    init_b(t_stack *a, t_stack *b);
 
 // utils
 
+char    **split(char *str, char c);
 int list_len(t_stack *pile);
 t_stack *search_last(t_stack  *pile);
 bool    is_sorted(t_stack *pile);

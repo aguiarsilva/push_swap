@@ -13,8 +13,8 @@
 NAME	=	push_swap
 
 LIBFT	= ./libft/libft.a
-LIBFT_PATH  = ./libft
-INC		= include/
+LIBFT_PATH  = ./libft/
+INC		= ./include/
 SRC_DIR = src/
 OBJ_DIR = obj/
 CC = gcc
@@ -32,7 +32,9 @@ SRC	=	$(SRC_DIR)push_swap.c	\
 		$(SRC_DIR)rotate.c	\
 		$(SRC_DIR)sort_big.c	\
 		$(SRC_DIR)sort_small.c	\
-		$(SRC_DIR)stack_utils.c	\
+		$(SRC_DIR)split.c \
+		$(SRC_DIR)fnd_a_b.c	\
+		$(SRC_DIR)fnd_b_a.c \
 		$(SRC_DIR)swap.c	\
 		$(SRC_DIR)utils.c	\
 
@@ -45,13 +47,13 @@ OBJS	:= $(patsubst $(SRC_DIR)%.c, $(OBJ_DIR)%.o,$(SRCS))
 
 all: $(NAME)
 
-$(OBJ_DIR)%.o:	$(SRC_DIR)%.c 
-	@mkdir -p $(@D)
-	@$(CC) $(CFLAGS) $(INC) -c $< -o $@
-
 $(NAME): $(OBJS)
 	@make -s -C ./libft
 	$(CC) $(CFLAGS) $(INC) $(OBJS) $(LIBFT) -o $(NAME)
+
+$(OBJ_DIR)%.o:	$(SRC_DIR)%.c 
+	@mkdir -p $(@D)
+	@$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
 start:
 	@make all

@@ -12,92 +12,98 @@
 
 #include "../include/push_swap.h"
 
-static void     cost_analysis(t_stack *a, t_stack *b)
+static void     add_node(t_stack **stack, int n)
 {
-    int len_stack_a;
-    int len_stack_b;
+    t_stack *node_to_add;
+    t_stack *end_node;
 
-    len_stack_a = list_len(a);
-    len_stack_b = list_len(b);
-    while (a)
+    if (!stack)
+        return ;
+    node_to_add = (t_stack *)malloc(sizeof(t_stack));
+    if (!node_to_add)
+        return ;
+    node_to_add->next = NULL;
+    node_to_add->num = n;
+    if (!(*stack))
     {
-        a->cost = a->i;
-        if (!(a->over_med))
-            a->cost = len_stack_a - (a->i);
-        if (a->target->over_med)
-            a->cost += a->target->i;
-        else
-            a->cost += len_stack_b - (a->target->i);
-        a = a->next;
+        *stack = node_to_add;
+        node_to_add->prev = NULL;
+    }
+    else
+    {
+        end_node = search_last(*stack);
+        end_node->next = node_to_add;
+        node_to_add->prev = end_node;
     }
 }
 
-static void     target_a(t_stack *a, t_stack *b)
+void    start_stack_a(t_stack **a, char **argv)
 {
-    t_stack *curr_b;
-    t_stack *target_node;
-    long        match_value;
+    long    n;
+    int     i;
 
-    while (a)
+    i = 0;
+    while (argv[i])
     {
-        match_value = LONG_MIN;
-        curr_b = b;
-        while (curr_b)
-        {
-            if (curr_b->num < a->num && curr_b->num > match_value)
-            {
-                match_value = curr_b->num;
-                target_node = curr_b;
-            }
-            curr_b = curr_b->next;
-        }
-        if (match_value == LONG_MIN)
-            a->target = find_biggest(b);
-        else
-            a->target = target_node;
-        a = a->next;
+        if (syntax_error(argv[i]))
+            err_free(a);
+        n = ft_atol(argv[i]);
+        if (n > INT_MAX || n < INT_MIN)
+            err_free(a);
+        if (dup_error(*a, (int)n))
+            err_free(a);
+        add_node(a, (int)n);
+        i++;
     }
 }
 
-static void     target_b(t_stack *a, t_stack *b)
+t_stack *get_cheapest(t_stack *node)
 {
-    t_stack     *curr_a;
-    t_stack     *target_node;
-    long            match_value;
-
-    while (b)
+    // check if the stack is empty and return null in case of it is
+    if (!node)
+        	return (NULL);
+    // iterate through the stack until its end
+    while (node)
     {
-        match_value = LONG_MAX;
-        curr_a = a;
-        while (curr_a)
-        {
-            if (curr_a->num > b->num && curr_a->num < match_value)
-            {
-                match_value = curr_a->num;
-                target_node = curr_a;
-            }
-            curr_a = curr_a->next;
-        }
-        if (match_value == LONG_MAX)
-            b->target = find_smallest(a);
-        else
-            b->target = target_node;
-        b = b->next;
+        // check if the attribute cheapest of the data is true
+        if (node->cheap)
+            // if so, return the stack
+            return (node);
+        // move the stack to the next node;
+        node = node->next;
     }
+    // if there is no iteration to be made anymore, return NULL
+    return (NULL);
 }
 
-void    init_a(t_stack *a, t_stack *b)
+void    set_to_push(t_stack **pile, t_stack *top_node, char stack_id)
 {
-    cur_index(a);
-    cur_index(b);
-    target_a(a, b);
-    cost_analysis(a, b);
-    set_cheapest(a);
-}
-
-void    init_b(t_stack *a, t_stack *b)
-{
-    cur_index(a);
-    cur_index(b);
-    target_b(a, b);
+ // iterate through the stack checking if the required node is not already the first node
+ while (*pile != top_node)
+ {
+    // if not, and it is stack a, do
+    if (stack_id == 'a')
+    {
+        //check if top node is above the median,
+        if (top_node->over_med) 
+            // if so, rotate a
+            ra(pile, false);
+        // if not
+        else
+            // reverse rotate a
+            rra(pile, false);
+    }        
+    // else if the stack is b
+    else if (stack_id == 'b')
+    {
+        // check if top node is above the median
+        if (top_node->over_med)
+            // if so, rotate b
+            rb(pile, false);
+        // if not
+        else
+            // reverse rotate b
+            rrb(pile, false);
+    }            
+ }
 }
