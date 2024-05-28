@@ -12,6 +12,29 @@
 
 #include "../include/push_swap.h"
 
+static long   ft_atoll(const char *str)
+{
+    long        res;
+    int         sign;
+
+    res = 0;
+    sign = 1;
+    while((*str == 32) || (*str >= 9 && *str <= 13))
+        str++;
+    if ((*str == '-') || (*str == '+'))
+    {
+        if (*str == '-')
+            sign = -1;
+        str++;
+    }
+    while (*str >= '0' && *str <= '9')
+    {
+        res = res * 10 + (*str - '0');
+        str++;
+    }
+    return (res * sign);
+}
+
 static void     add_node(t_stack **stack, int n)
 {
     t_stack *node_to_add;
@@ -47,7 +70,7 @@ void    start_stack_a(t_stack **a, char **argv)
     {
         if (syntax_error(argv[i]))
             err_free(a);
-        n = ft_atol(argv[i]);
+        n = ft_atoll(argv[i]);
         if (n > INT_MAX || n < INT_MIN)
             err_free(a);
         if (dup_error(*a, (int)n))
@@ -59,50 +82,33 @@ void    start_stack_a(t_stack **a, char **argv)
 
 t_stack *get_cheapest(t_stack *node)
 {
-    // check if the stack is empty and return null in case of it is
     if (!node)
         	return (NULL);
-    // iterate through the stack until its end
     while (node)
     {
-        // check if the attribute cheapest of the data is true
         if (node->cheap)
-            // if so, return the stack
             return (node);
-        // move the stack to the next node;
         node = node->next;
     }
-    // if there is no iteration to be made anymore, return NULL
     return (NULL);
 }
 
 void    set_to_push(t_stack **pile, t_stack *top_node, char stack_id)
 {
- // iterate through the stack checking if the required node is not already the first node
  while (*pile != top_node)
  {
-    // if not, and it is stack a, do
     if (stack_id == 'a')
     {
-        //check if top node is above the median,
-        if (top_node->over_med) 
-            // if so, rotate a
+        if (top_node->over_med)
             ra(pile, false);
-        // if not
         else
-            // reverse rotate a
             rra(pile, false);
     }        
-    // else if the stack is b
     else if (stack_id == 'b')
     {
-        // check if top node is above the median
         if (top_node->over_med)
-            // if so, rotate b
             rb(pile, false);
-        // if not
         else
-            // reverse rotate b
             rrb(pile, false);
     }            
  }

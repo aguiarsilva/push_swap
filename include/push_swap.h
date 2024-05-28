@@ -43,8 +43,8 @@ typedef struct s_pile
 
 //Error Handling
 
-void    exit_error(t_pile **a, char **argv, bool flag_argc);
-void    stack_free(t_pile  **node);
+//void    exit_error(t_stack **a, char **argv, bool flag_argc);
+void    stack_free(t_stack  **node);
 void    err_free(t_stack **a);
 int     syntax_error(char *str);
 int     dup_error(t_stack *a, int n);
@@ -53,7 +53,7 @@ int     dup_error(t_stack *a, int n);
 // Start Stack
 
 void    start_stack_a(t_stack **a, char **argv);
-void     add_node(t_stack **pile, int n);
+//void     add_node(t_stack **pile, int n);
 
 // Start nodes
 
@@ -91,6 +91,6 @@ void    pb(t_stack **a, t_stack **b, bool flag);
 
 void    small_sort(t_stack **a);
 void    sort_big(t_stack **a, t_stack **b);
-void     small_on_top(t_stack **a);
+//void     small_on_top(t_stack **a);
 
 #endif

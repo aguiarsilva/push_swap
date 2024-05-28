@@ -16,7 +16,7 @@ static void rev_rotate(t_stack **node)
 {
     t_stack *end;
 
-    if ( *node == NULL || (*node)->next == NULL)
+    if (!(*node) || (!(*node)->next))
         return ;
     end = search_last(*node);
     end->next = *node;

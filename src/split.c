@@ -15,22 +15,24 @@
 static int      word_count(char *str, char c)
 {
     int         wc;
-    bool    letter;
+    int         word_letters;
 
     wc = 0;
+    word_letters = 0;
     while (*str)
     {
-        letter = false;
-        while (*str == c)
-            ++str;
-        while (*str != c && *str)
+        while (*str)
         {
-            if (letter)
+            if (*str != c && word_letters == 0)
             {
-                ++wc;
-                letter = true;
+                wc++;
+                word_letters = 1;
             }
-            ++str;
+            else if (*str == c)
+            {
+                word_letters = 0;
+            }
+            str++;
         }
     }
     return (wc);
@@ -40,19 +42,22 @@ static char     *put_substr(char *str, char c)
 {
     static int      pos;
     char            *substr;
-    int             len;
+    size_t             len;
     int             idx;
 
+    pos = 0;
     len = 0;
     idx = 0;
     while (str[pos] == c)
-        ++pos;
-    while ((str[pos + len] != c) && str[pos + len])
-        ++len;
+        pos++;
+    if (str[pos] == '\0')
+        return (NULL);
+    while ((str[pos + len] != c) && str[pos + len] != '\0')
+        len++;
     substr = malloc((size_t)len * sizeof(char) + 1);
     if (!substr)
         return (NULL);
-    while ((s[pos] != c) && str[pos])
+    while ((str[pos] != c) && str[pos])
         substr[idx++] = str[pos++];
     substr[idx] = '\0';
     return (substr);
@@ -68,7 +73,7 @@ char    **split(char *str, char c)
     wc = word_count(str, c);
     if (!wc)
         exit(1);
-    arr = malloc((wc + 2) * sizeof(char *));
+    arr = malloc(sizeof(char *) * (size_t)(wc + 2));
     if (!arr)
         return (NULL);
     while (wc-- >= 0)
@@ -76,7 +81,7 @@ char    **split(char *str, char c)
         if (idx == 0)
         {
             arr[idx] = malloc(sizeof(char));
-            if (!arr)
+            if (!arr[idx])
                 return (NULL);
             arr[idx++][0] = '\0';
             continue;

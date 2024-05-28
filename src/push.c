@@ -17,8 +17,8 @@ static void     push(t_stack **dest, t_stack **src)
     t_stack *to_push;
 
     if (!*src)
-        return;
-    to_push = *src;
+        return ;
+    to_push = (*src);
     *src = (*src)->next;
     if (*src)
         (*src)->prev = NULL;

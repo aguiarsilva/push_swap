@@ -14,33 +14,22 @@
 
 void    cur_index(t_stack *pile)
 {
-    // need variable to store the index of current node
     int idx;
-    // need variable to store the position of the median of stack
     int median;
-    // set the first index to '0' as it is the first index number
+
     idx = 0;
-    // check if the stack is empty, if so, return
     if (!pile)
-        return;
-    // the median needs to be calculated by dividing the lenght of the stack by 2
+        return ;
     median = list_len(pile) / 2;
-    // iterate through the stack until its end
     while (pile)
     {
-        //assign the current index value to the current node
         pile->i = idx;
-        //if index is less or equal median
         if (idx <= median)
-            // set the above_median attribute of the structure to true
             pile->over_med = true;     
         else
-        // else set it to false
             pile->over_med = false;
-        // move to the next node to continue the iteration
         pile = pile->next;
-        // increment the index value to set the next node with its index number
-        ++idx;
+        idx++;
     }
 }
 
@@ -99,7 +88,7 @@ void    set_cheapest(t_stack *pile)
     t_stack     *cheapest_node;
     // need to check if the stack is empty and return in case of empty stack
     if  (!pile)
-        return;
+        return ;
     // assign the biggest long number as the cheapest to begin
     cheapest = LONG_MAX;
     // iterate through the stack until its end

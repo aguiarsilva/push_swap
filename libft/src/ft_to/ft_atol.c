@@ -12,11 +12,13 @@
 
 #include "../../inc/libft.h"
 
-long   ft_atol(char *str)
+long   ft_atol(const char *str)
 {
     long        res;
     int         sign;
 
+    res = 0;
+    sign = 1;
     while((*str == 32) || (*str >= 9 && *str <= 13))
         str++;
     if ((*str == '-') || (*str == '+'))
@@ -25,7 +27,7 @@ long   ft_atol(char *str)
             sign = -1;
         str++;
     }
-    while (*str >= '0' && *str <= '9' && *str)
+    while (*str >= '0' && *str <= '9')
     {
         res = res * 10 + (*str - '0');
         str++;

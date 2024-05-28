@@ -37,7 +37,7 @@ static void     push_a_b(t_stack **a, t_stack **b)
         return ;
     if (cheap_node->over_med && cheap_node->target->over_med)
         rot_both(a, b, cheap_node);
-    else if (!(cheap_node->over_med && cheap_node->target->over_med))
+    else if (!(cheap_node->over_med) && !(cheap_node->target->over_med))
         rev_rot_both(a, b, cheap_node);
     set_to_push(a, cheap_node, 'a');
     set_to_push(b, cheap_node->target, 'b');
@@ -50,7 +50,7 @@ static void     push_b_a(t_stack **a, t_stack **b)
     pa(a, b, false);
 }
 
-void     small_on_top(t_stack **a)
+static void     small_on_top(t_stack **a)
 {
     while ((*a)->num != find_smallest(*a)->num)
     {

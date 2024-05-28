@@ -12,40 +12,40 @@
 
 #include "../include/push_swap.h"
 
-int list_len(t_stack *pile) //Function to calculate and return lenght of pile
+int list_len(t_stack *pile)
 {
     int count;
 
-    if(!pile)
-        return (0);
     count = 0;
-    while (pile) //loop until the end of the pile is reached
+    if (!pile)
+        return (0);
+    while (pile)
     {
-        pile = pile->next; //Move to next node
+        pile = pile->next;
         count++;
     }
     return (count);
 }
 
-t_stack *search_last(t_stack  *pile) //function to find last node
+t_stack *search_last(t_stack  *pile)
 {
-    if(!pile)
+    if (!pile)
         return (NULL);
-    while (pile->next) //loop to the end of the pile
+    while (pile->next)
         pile = pile->next;
-    return(pile);
+    return (pile);
 }
 
-bool    is_sorted(t_stack *pile) //function to check if pile is already sorted
+bool    is_sorted(t_stack *pile)
 {
-    if(!pile)
+    if (!pile)
         return (1);
     while (pile->next)
     {
-        if (pile->num > pile->next->num) //check if current value is larger than next value
+        if (pile->num > pile->next->num)
             return (false);
-        pile = pile->next; //if not, move to next node and test it
-    } 
+        pile = pile->next;
+    }
     return (true);
 }
 
@@ -54,7 +54,8 @@ t_stack *find_smallest(t_stack   *pile)
     long    min;
     t_stack *smallest_node;
 
-    if(!pile)
+    smallest_node = NULL;
+    if (!pile)
         return (NULL);
     min = LONG_MAX;
     while (pile)
@@ -77,7 +78,7 @@ t_stack *find_biggest(t_stack  *pile)
     if (!pile)
         return (NULL);
     max = LONG_MIN;
-    while(pile)
+    while (pile)
     {
         if (pile->num > max)
         {

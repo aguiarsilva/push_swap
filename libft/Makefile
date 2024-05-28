@@ -6,7 +6,7 @@
 #    By: baguiar- <baguiar-@student.42wolfsburg.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/15 11:53:45 by baguiar-          #+#    #+#              #
-#    Updated: 2024/05/17 22:57:06 by baguiar-         ###   ########.fr        #
+#    Updated: 2024/05/23 16:33:38 by baguiar-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ OBJ_DIR		:= obj/
 
 CC := cc
 
-CCFLAGS := -Wextra -Wall -Werror -I.
+CCFLAGS := -Wextra -Wall -Werror -I
 
 RM = rm -f
 
