@@ -43,7 +43,7 @@ void    pa(t_stack **a, t_stack **b, bool flag)
         ft_printf("pa\n");
 }
 
-void    pb(t_stack **a, t_stack **b, bool flag)
+void    pb(t_stack **b, t_stack **a, bool flag)
 {
     push(b, a);
     if(!flag)
