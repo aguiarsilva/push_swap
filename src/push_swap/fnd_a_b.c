@@ -10,33 +10,33 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/push_swap.h"
+#include "../../include/push_swap.h"
 
-void    cur_index(t_stack *pile)
+void    cur_index(t_stack *stack)
 {
     int idx;
     int median;
 
     idx = 0;
-    if (!pile)
+    if (!stack)
         return ;
-    median = list_len(pile) / 2;
-    while (pile)
+    median = list_len(stack) / 2;
+    while (stack)
     {
-        pile->i = idx;
+        stack->i = idx;
         if (idx <= median)
-            pile->over_med = true;     
+            stack->over_med = true;     
         else
-            pile->over_med = false;
-        pile = pile->next;
-        idx++;
+            stack->over_med = false;
+        stack = stack->next;
+        ++idx;
     }
 }
 
 static void     target_a(t_stack *a, t_stack *b)
 {
     t_stack *curr_b;
-    t_stack *target_node;
+    t_stack *target;
     long        match_value;
 
     while (a)
@@ -48,14 +48,14 @@ static void     target_a(t_stack *a, t_stack *b)
             if (curr_b->num < a->num && curr_b->num > match_value)
             {
                 match_value = curr_b->num;
-                target_node = curr_b;
+                target = curr_b;
             }
             curr_b = curr_b->next;
         }
         if (match_value == LONG_MIN)
             a->target = find_biggest(b);
         else
-            a->target = target_node;
+            a->target = target;
         a = a->next;
     }
 }
@@ -80,30 +80,30 @@ static void     cost_analysis(t_stack *a, t_stack *b)
     }
 }
 
-void    set_cheapest(t_stack *pile)
+void    set_cheapest(t_stack *stack)
 {
     // need variable to store the value of the cheapest node found on the iteration
     long    cheapest;
     // need variable to store pointer to the cheapest node so far
     t_stack     *cheapest_node;
     // need to check if the stack is empty and return in case of empty stack
-    if  (!pile)
+    if  (!stack)
         return ;
     // assign the biggest long number as the cheapest to begin
     cheapest = LONG_MAX;
     // iterate through the stack until its end
-    while (pile)
+    while (stack)
     {
         // Check if the current push cost is cheaper than the cheapest value
-        if (pile->cost < cheapest)
+        if (stack->cost < cheapest)
         {
             //if so, update the current node
-            cheapest = pile->cost;
+            cheapest = stack->cost;
             //assign the current value to the cheapest value so far  
-            cheapest_node = pile;
+            cheapest_node = stack;
         } 
         // move to next node to compare it
-        pile = pile->next;
+        stack = stack->next;
     }           
     // if no cheapest node than the current is found, set the cheapest node attribute to true
     cheapest_node->cheap = true;

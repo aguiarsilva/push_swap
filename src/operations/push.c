@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/push_swap.h"
+#include "../../include/push_swap.h"
 
 static void     push(t_stack **dest, t_stack **src)
 {
@@ -18,12 +18,12 @@ static void     push(t_stack **dest, t_stack **src)
 
     if (!*src)
         return ;
-    to_push = (*src);
+    to_push = *src;
     *src = (*src)->next;
     if (*src)
         (*src)->prev = NULL;
     to_push->prev = NULL;
-    if(!*dest)
+    if (!*dest)
     {
         *dest = to_push;
         to_push->next = NULL;

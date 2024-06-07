@@ -10,12 +10,12 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/push_swap.h"
+#include "../../include/push_swap.h"
 
 static void     target_b(t_stack *a, t_stack *b)
 {
     t_stack     *curr_a;
-    t_stack     *target_node;
+    t_stack     *target;
     long            match_value;
 
     while (b)
@@ -27,14 +27,14 @@ static void     target_b(t_stack *a, t_stack *b)
             if (curr_a->num > b->num && curr_a->num < match_value)
             {
                 match_value = curr_a->num;
-                target_node = curr_a;
+                target = curr_a;
             }
             curr_a = curr_a->next;
         }
         if (match_value == LONG_MAX)
             b->target = find_smallest(a);
         else
-            b->target = target_node;
+            b->target = target;
         b = b->next;
     }
 }

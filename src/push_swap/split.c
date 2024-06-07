@@ -10,29 +10,27 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/push_swap.h"
+#include "../../include/push_swap.h"
 
 static int      word_count(char *str, char c)
 {
     int         wc;
-    int         word_letters;
+    bool         word_letters;
 
     wc = 0;
-    word_letters = 0;
     while (*str)
     {
-        while (*str)
+        word_letters = false;
+        while (*str == c)
+            ++str;
+        while (*str != c && *str)
         {
-            if (*str != c && word_letters == 0)
+            if (!word_letters)
             {
-                wc++;
-                word_letters = 1;
+                ++wc;
+                word_letters = true;
             }
-            else if (*str == c)
-            {
-                word_letters = 0;
-            }
-            str++;
+            ++str;
         }
     }
     return (wc);
@@ -42,18 +40,15 @@ static char     *put_substr(char *str, char c)
 {
     static int      pos;
     char            *substr;
-    size_t             len;
+    int             len;
     int             idx;
 
-    pos = 0;
     len = 0;
     idx = 0;
     while (str[pos] == c)
-        pos++;
-    if (str[pos] == '\0')
-        return (NULL);
-    while ((str[pos + len] != c) && str[pos + len] != '\0')
-        len++;
+        ++pos;
+    while ((str[pos + len] != c) && (str[pos + len] != '\0'))
+        ++len;
     substr = malloc((size_t)len * sizeof(char) + 1);
     if (!substr)
         return (NULL);

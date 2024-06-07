@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/push_swap.h"
+#include "../../include/push_swap.h"
 
 static void     rot_both(t_stack **a, t_stack **b, t_stack *cheap_node)
 {
@@ -33,8 +33,6 @@ static void     push_a_b(t_stack **a, t_stack **b)
     t_stack *cheap_node;
 
     cheap_node = get_cheapest(*a);
-    if (cheap_node == NULL)
-        return ;
     if (cheap_node->over_med && cheap_node->target->over_med)
         rot_both(a, b, cheap_node);
     else if (!(cheap_node->over_med) && !(cheap_node->target->over_med))

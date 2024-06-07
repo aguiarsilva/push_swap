@@ -10,82 +10,82 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/push_swap.h"
+#include "../../include/push_swap.h"
 
-int list_len(t_stack *pile)
+int list_len(t_stack *stack)
 {
     int count;
 
     count = 0;
-    if (!pile)
+    if (!stack)
         return (0);
-    while (pile)
+    while (stack)
     {
-        pile = pile->next;
+        stack = stack->next;
         count++;
     }
     return (count);
 }
 
-t_stack *search_last(t_stack  *pile)
+t_stack *search_last(t_stack  *stack)
 {
-    if (!pile)
+    if (!stack)
         return (NULL);
-    while (pile->next)
-        pile = pile->next;
-    return (pile);
+    while (stack->next)
+        stack = stack->next;
+    return (stack);
 }
 
-bool    is_sorted(t_stack *pile)
+bool    is_sorted(t_stack *stack)
 {
-    if (!pile)
+    if (!stack)
         return (1);
-    while (pile->next)
+    while (stack->next)
     {
-        if (pile->num > pile->next->num)
+        if (stack->num > stack->next->num)
             return (false);
-        pile = pile->next;
+        stack = stack->next;
     }
     return (true);
 }
 
-t_stack *find_smallest(t_stack   *pile)
+t_stack *find_smallest(t_stack   *stack)
 {
     long    min;
     t_stack *smallest_node;
 
     smallest_node = NULL;
-    if (!pile)
+    if (!stack)
         return (NULL);
     min = LONG_MAX;
-    while (pile)
+    while (stack)
     {
-        if (pile->num < min)
+        if (stack->num < min)
         {
-            min = pile->num;
-            smallest_node = pile;
+            min = stack->num;
+            smallest_node = stack;
         }
-        pile = pile->next;
+        stack = stack->next;
     }
     return (smallest_node);
 }
 
-t_stack *find_biggest(t_stack  *pile)
+t_stack *find_biggest(t_stack  *stack)
 {
     long    max;
     t_stack *biggest_node;
 
-    if (!pile)
+    if (!stack)
         return (NULL);
     max = LONG_MIN;
-    while (pile)
+    while (stack)
     {
-        if (pile->num > max)
+        if (stack->num > max)
         {
-            max = pile->num;
-            biggest_node = pile;
+            max = stack->num;
+            biggest_node = stack;
         }
-        pile = pile->next;
+        stack = stack->next;
     }
     return (biggest_node);
 }

@@ -10,19 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/push_swap.h"
+#include "../../include/push_swap.h"
 
-static void rev_rotate(t_stack **node)
+static void rev_rotate(t_stack **stack)
 {
     t_stack *end;
 
-    if (!(*node) || (!(*node)->next))
+    if (!*stack || !(*stack)->next)
         return ;
-    end = search_last(*node);
+    end = search_last(*stack);
     end->prev->next = NULL;
-    end->next = *node;
+    end->next = *stack;
     end->prev = NULL;
-    *node = end;
+    *stack = end;
     end->next->prev = end;
 }
 

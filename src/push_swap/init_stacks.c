@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/push_swap.h"
+#include "../../include/push_swap.h"
 
 static long   ft_atoll(const char *str)
 {
@@ -27,11 +27,8 @@ static long   ft_atoll(const char *str)
             sign = -1;
         str++;
     }
-    while (*str >= '0' && *str <= '9')
-    {
-        res = res * 10 + (*str - '0');
-        str++;
-    }
+    while (ft_isdigit(*str))
+        res = res * 10 + (*str++ - '0');
     return (res * sign);
 }
 
@@ -42,7 +39,7 @@ static void     add_node(t_stack **stack, int n)
 
     if (!stack)
         return ;
-    node_to_add = (t_stack *)malloc(sizeof(t_stack));
+    node_to_add = malloc(sizeof(t_stack));
     if (!node_to_add)
         return ;
     node_to_add->next = NULL;
@@ -80,36 +77,36 @@ void    start_stack_a(t_stack **a, char **argv)
     }
 }
 
-t_stack *get_cheapest(t_stack *node)
+t_stack *get_cheapest(t_stack *stack)
 {
-    if (!node)
+    if (!stack)
         	return (NULL);
-    while (node)
+    while (stack)
     {
-        if (node->cheap)
-            return (node);
-        node = node->next;
+        if (stack->cheap)
+            return (stack);
+        stack = stack->next;
     }
     return (NULL);
 }
 
-void    set_to_push(t_stack **pile, t_stack *top_node, char stack_id)
+void    set_to_push(t_stack **stack, t_stack *top_node, char stack_id)
 {
- while (*pile != top_node)
+ while (*stack != top_node)
  {
     if (stack_id == 'a')
     {
         if (top_node->over_med)
-            ra(pile, false);
+            ra(stack, false);
         else
-            rra(pile, false);
+            rra(stack, false);
     }        
     else if (stack_id == 'b')
     {
         if (top_node->over_med)
-            rb(pile, false);
+            rb(stack, false);
         else
-            rrb(pile, false);
+            rrb(stack, false);
     }            
  }
 }

@@ -13,8 +13,7 @@
 NAME	=	push_swap
 
 LIBFT	= ./libft/libft.a
-LIBFT_PATH  = ./libft/
-INC		= ./include/
+INC		= include/
 SRC_DIR = src/
 OBJ_DIR = obj/
 CC = gcc
@@ -22,44 +21,40 @@ CC = gcc
 RM = rm -f
 
 CFLAGS = -Wall -Werror -Wextra -I
-DEBUGFLAG = -fsanitize=address
 
-SRC	=	$(SRC_DIR)push_swap.c	\
-		$(SRC_DIR)error.c	\
-		$(SRC_DIR)init_stacks.c	\
-		$(SRC_DIR)push.c	\
-		$(SRC_DIR)rev_rotate.c	\
-		$(SRC_DIR)rotate.c	\
-		$(SRC_DIR)sort_big.c	\
-		$(SRC_DIR)sort_small.c	\
-		$(SRC_DIR)split.c \
-		$(SRC_DIR)fnd_a_b.c	\
-		$(SRC_DIR)fnd_b_a.c \
-		$(SRC_DIR)swap.c	\
-		$(SRC_DIR)utils.c	\
+OPERATIONS_DIR	=	$(SRC_DIR)operations/push.c	\
+					$(SRC_DIR)operations/rev_rotate.c	\
+					$(SRC_DIR)operations/rotate.c	\
+					$(SRC_DIR)operations/sort_big.c	\
+					$(SRC_DIR)operations/sort_small.c	\
+					$(SRC_DIR)operations/swap.c \
 
-SRCS = $(SRC)
+PUSH_SWAP_DIR	=	$(SRC_DIR)push_swap/error.c	\
+					$(SRC_DIR)push_swap/fnd_a_b.c	\
+					$(SRC_DIR)push_swap/fnd_b_a.c \
+					$(SRC_DIR)push_swap/init_stacks.c	\
+					$(SRC_DIR)push_swap/push_swap.c \
+					$(SRC_DIR)push_swap/split.c	\
+					$(SRC_DIR)push_swap/utils.c \
 
-OBJS	:= $(patsubst $(SRC_DIR)%.c, $(OBJ_DIR)%.o,$(SRCS))
+SRCS = $(OPERATIONS_DIR) $(PUSH_SWAP_DIR)
 
-# $(LIBFT)
-#	@make -C ./libft
-
-all: $(NAME)
-
-$(NAME): $(OBJS)
-	@make -s -C ./libft
-	$(CC) $(CFLAGS) $(INC) $(OBJS) $(LIBFT) -o $(NAME)
-
-$(OBJ_DIR)%.o:	$(SRC_DIR)%.c 
-	@mkdir -p $(@D)
-	@$(CC) $(CFLAGS) $(INC) -c $< -o $@
+OBJ	:= $(patsubst $(SRC_DIR)%.c,$(OBJ_DIR)%.o,$(SRCS))
 
 start:
 	@make all
 
-libft:
+$(LIBFT):
 	@make -C ./libft
+
+all: $(NAME)
+
+$(NAME): $(OBJ) $(LIBFT)
+	@$(CC) $(CFLAGS) $(INC) $(OBJ) $(LIBFT) -o $(NAME)
+
+$(OBJ_DIR)%.o:	$(SRC_DIR)%.c 
+	@mkdir -p $(@D)
+	@$(CC) $(CFLAGS) $(INC) -c $< -o $@
 
 clean:
 	@$(RM) -r $(OBJ_DIR)

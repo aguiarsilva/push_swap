@@ -10,29 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/push_swap.h"
-
-/*void    exit_error(t_pile **a, char **argv, bool flag_argc)
-{
-    stack_free(a);
-    if (flag_argc)
-        free_split_argv(argv);
-    ft_printf("Error\n");
-    exit(1);
-}*/
+#include "../../include/push_swap.h"
 
 int     syntax_error(char *str)
 {
-    int i;
-
-    i = 0;
-    if (!(str[i] == '-' || str[i] == '+' || (str[i] >= '0' && str[i] <= '9')))
+    if (!(*str == '-' || *str == '+' || (*str >= '0' && *str <= '9')))
         return (1);
-    if ((str[i] == '+' || str[i] == '-') && !(str[1] >= '0' && str[1] <= '9'))
+    if ((*str == '+' || *str == '-') && !(str[1] >= '0' && str[1] <= '9'))
         return (1);
-    while (str[++i])
+    while (*++str)
     {
-        if (!(str[i] >= '0' && str[i] <= '9'))
+        if (!(*str >= '0' && *str <= '9'))
             return (1);
     }
     return (0);    
@@ -52,34 +40,23 @@ int     dup_error(t_stack *a, int n)
 }
        
 
-void    stack_free(t_stack  **node)
+void    stack_free(t_stack  **stack)
 {
     t_stack *temp;
     t_stack *curr;
 
-    if (!node)
+    if (!stack)
         return ;
-    curr = *node;
+    curr = *stack;
     while (curr)    
     {
         temp = curr->next;
+        curr->num = 0;
         free(curr);
         curr = temp;
     }
-    *node = NULL;
+    *stack = NULL;
 }
-
-/*void    free_split(char **argv)
-{
-    int idx;
-
-    if (!argv || !*argv)
-        return ;
-    idx = -1;
-    while (argv[idx])
-        free(argv[idx++]);
-    free (argv - 1);
-}*/
 
 void    err_free(t_stack **a)
 {

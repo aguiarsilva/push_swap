@@ -10,18 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/push_swap.h"
+#include "../../include/push_swap.h"
 
-static void     rotate(t_stack  **node)
+static void     rotate(t_stack  **stack)
 {
     t_stack *end_node;
 
-    if (!(*node) || !(*node)->next) 
+    if (!*stack || !(*stack)->next) 
         return ;
-    end_node = search_last(*node);
-    end_node->next = *node;
-    *node = (*node)->next;
-    (*node)->prev = NULL;
+    end_node = search_last(*stack);
+    end_node->next = *stack;
+    *stack = (*stack)->next;
+    (*stack)->prev = NULL;
     end_node->next->prev = end_node;
     end_node->next->next = NULL;
 }

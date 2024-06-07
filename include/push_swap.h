@@ -34,44 +34,34 @@ typedef struct s_stack
     struct  s_stack *prev;
 } t_stack;
 
-/*
-typedef struct s_pile
-{
-    t_stack  *top;
-} t_pile;
-*/
-
 //Error Handling
 
-//void    exit_error(t_stack **a, char **argv, bool flag_argc);
-void    stack_free(t_stack  **node);
-void    err_free(t_stack **a);
 int     syntax_error(char *str);
 int     dup_error(t_stack *a, int n);
-//void    free_split(char **argv);
+void    stack_free(t_stack  **stack);
+void    err_free(t_stack **a);
 
 // Start Stack
 
 void    start_stack_a(t_stack **a, char **argv);
-//void     add_node(t_stack **pile, int n);
+char    **split(char *str, char c);
 
 // Start nodes
 
 void    init_a(t_stack *a, t_stack *b);
 void    init_b(t_stack *a, t_stack *b);
+void    cur_index(t_stack *stack);
+void    set_cheapest(t_stack *stack);
+t_stack *get_cheapest(t_stack *stack);
+void    set_to_push(t_stack **stack, t_stack *top_node, char stack_id);
 
 // utils
 
-char    **split(char *str, char c);
-int list_len(t_stack *pile);
-t_stack *search_last(t_stack  *pile);
-bool    is_sorted(t_stack *pile);
-t_stack *find_smallest(t_stack   *pile);
-t_stack *find_biggest(t_stack  *pile);
-void    set_cheapest(t_stack *node);
-t_stack *get_cheapest(t_stack *node);
-void    cur_index(t_stack *node);
-void    set_to_push(t_stack **node, t_stack *top_node, char stack_id);
+int list_len(t_stack *stack);
+t_stack *search_last(t_stack  *stack);
+bool    is_sorted(t_stack *stack);
+t_stack *find_smallest(t_stack   *stack);
+t_stack *find_biggest(t_stack  *stack);
 
 // Commands
 
@@ -91,6 +81,5 @@ void    pb(t_stack **a, t_stack **b, bool flag);
 
 void    small_sort(t_stack **a);
 void    sort_big(t_stack **a, t_stack **b);
-//void     small_on_top(t_stack **a);
 
 #endif

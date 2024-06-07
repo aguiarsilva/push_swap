@@ -10,11 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/push_swap.h"
+#include "../../include/push_swap.h"
 
 static void    swap(t_stack **head)
 {
-    if (*head || (*head)->next)
+    if (!*head || !(*head)->next)
         return;
     *head = (*head)->next;
     (*head)->prev->prev = *head;
