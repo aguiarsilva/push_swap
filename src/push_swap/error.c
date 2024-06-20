@@ -58,6 +58,18 @@ void    stack_free(t_stack  **stack)
     *stack = NULL;
 }
 
+void    free_split(char **argv)
+{
+    int    i;
+
+    if (!argv || !*argv)
+        return ;
+    i = -1;
+    while (argv[i])
+        free (argv[i++]);
+    free (argv - 1);
+}
+
 void    err_free(t_stack **a)
 {
     stack_free(a);
