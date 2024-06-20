@@ -75,6 +75,8 @@ void    start_stack_a(t_stack **a, char **argv)
         add_node(a, (int)n);
         i++;
     }
+    if (flag_argc)
+        free_split(argv);
 }
 
 t_stack *get_cheapest(t_stack *stack)
