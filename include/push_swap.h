@@ -43,7 +43,7 @@ void    err_free(t_stack **a);
 
 // Start Stack
 
-void    start_stack_a(t_stack **a, char **argv);
+void    start_stack_a(t_stack **a, char **argv, bool flag_argc);
 char    **split(char *str, char c);
 
 // Start nodes
