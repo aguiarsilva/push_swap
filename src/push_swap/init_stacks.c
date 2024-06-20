@@ -57,7 +57,7 @@ static void     add_node(t_stack **stack, int n)
     }
 }
 
-void    start_stack_a(t_stack **a, char **argv)
+void    start_stack_a(t_stack **a, char **argv, bool flag_argc)
 {
     long    n;
     int     i;
