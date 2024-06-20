@@ -24,7 +24,7 @@ int main(int argc, char **argv)
         return (1);
     else if (argc == 2)
         argv = split(argv[1], ' ');
-    start_stack_a(&a, argv + 1);
+    start_stack_a(&a, argv + 1, argc == 2);
     if (!is_sorted(a))
     {
         if (list_len(a) == 2)
